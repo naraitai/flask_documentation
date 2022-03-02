@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav id="navbar"> <!-- user story 8 and 14 (required) -->
+            <div id="header">
+                <img id="logo" src="assets/Flask_logo.svg">
+                <header id="title">Flask Documentation</header> <!-- user story 9 and 11 (required) -->
+            </div>
+            <div class="link-container">
+                <a class="nav-link active" href="#Introduction">Introduction</a> <!-- user story 10 (required) -->
+                <a class="nav-link" href="#Installation">Installation</a> <!-- user story 10, 12 & 13 (required) -->
+                <a class="nav-link" href="#Simple_Application">Simple Application</a> <!-- user story 10, 12 & 13 (required) -->
+                <a class="nav-link" href="#File_Structure">File Structure</a> <!-- user story 10, 12 & 13 (required) -->
+                <a class="nav-link" href="#Templates">Templates</a> <!-- user story 10, 12 & 13 (required) -->
+                <a class="nav-link" href="#Testing">Testing</a> <!-- user story 10, 12 & 13 (required) -->
+                <a class="nav-link" href="#Deployment">Deployment</a> <!-- user story 10, 12 & 13 (required) -->
+                <a class="nav-link" href="#Reference">Reference</a> <!-- user story 10, 12 & 13 (required) -->
+            </div>
+        </nav>
+
+        <main id="main-doc"> <!-- user story 1 (required) -->
+            <section id="Introduction" class="main-section"> <!-- user story 2 (required) --> <!-- user story 4 (required) -->
+                <header>Introduction</header> <!-- user story 3 (required) -->
+                <h3>Microframework</h3>
+                <p>
+                    Flask is a micro web framework written in Python. 
+                    This means that Flask aims to keep the core simple, but extensible.
+                </p> <!-- user story 5 (required) -->
+                <p>
+                    To achieve this Flask does not include a database abstraction layer, 
+                    form validation or indeed anything that is already covered by other libraries.
+                </p> <!-- user story 5 (required) -->
+                <h3>Extensions</h3>
+                <p>
+                    To get this functionality with Flask you need to use Extensions. 
+                    These allow for database integration, form validation and many other features. 
+                </p> <!-- user story 5 (required) -->
+            </section>
+
+            <section id="Installation" class="main-section"> <!-- user story 2 (required) --> <!-- user story 4 (required) -->
+                <header>Installation</header> <!-- user story 3 (required) -->
+                <h3>Python</h3>
+                <p>
+                    Flask recommends downloading the most up to date version of Python. 
+                    However, Flask does support Python version 3.6 and up.
+                    <a href="https://www.python.org/downloads/">Download the latest version of Python.</a>
+                </p> <!-- user story 5 (required) -->
+                <h3>Virtual Environment</h3>
+                <p>
+                    It is recommended that you setup a Python virtual environment for each project. 
+                    This is as simple as…
+                </p> <!-- user story 5 (required) -->
+                <code>
+                    py -3 -m venv venv
+                </code> <!-- user story 6 (required) -->
+                <p>
+                    This allows you to manage dependencies for the project. 
+                    Newer versions of libraries for one project can break compatibility in other projects. 
+                    Virtual environments allow you to manage this for each project.
+                </p> <!-- user story 5 (required) -->
+                <h3>Flask</h3>
+                <p>
+                    Once you have Python downloaded and a virtual environment setup simply download Flask 
+                    with pip install as shown below.
+                </p> <!-- user story 5 (required) -->
+                <code>$ pip install Flask</code> <!-- user story 6 (required) -->
+                <p>
+                    Flask installs a series of dependencies.
+                </p> <!-- user story 5 (required) -->
+                <ul>
+                    <li>
+                        Werkzeug: which implements WSGI Python interface between applications and servers.
+                    </li> <!-- user story 7 (required) -->
+                    <li>
+                        Jinja2: template language used to render pages served by application.
+                    </li> <!-- user story 7 (required) -->
+                    <li>
+                        MarkupSage: this comes with Jinja2 and escapes untrusted input when rendering 
+                        templates to provide some protection against injection attacks.
+                    </li> <!-- user story 7 (required) -->
+                    <li>
+                        ItsDangerous: this signs data to ensure integrates and is used to protect Flask's session cookie.
+                    </li> <!-- user story 7 (required) -->
+                    <li>
+                        Click: this is  a framework for command line applications and adds flask command.
+                    </li> <!-- user story 7 (required) -->
+                </ul>
+            </section>
+
+            <section id="Simple_Application" class="main-section"> <!-- user story 2 (required) --> <!-- user story 4 (required) -->
+                <header>Simple Application</header> <!-- user story 3 (required) -->
+                <h3>Setup</h3>
+                <p>
+                    To create a Flask application you will need to import the Flask class. 
+                    The WSGI application is an instance of the Flask class.
+                </p> <!-- user story 5 (required) -->
+                <code>
+                    from flask import Flask
+                </code> <!-- user story 6 (required) -->
+                <p>
+                    To create an instance do the following
+                </p> <!-- user story 5 (required) -->
+                <code>
+                    app = Flask(__name__)
+                </code> <!-- user story 6 (required) -->
+                <p>
+                    __name__ is a shortcut that can be used in most cases. 
+                    This lets Flask know where to find resources like templates and static files.
+                </p>
+                <p>
+                    Then use the route() decorator to instruct Flask which URL should trigger the defined function.
+                </p>
+                <pre>
+                    <code>
+                        @app.route("/")<br>
+                        def hello_world():<br>
+                            return "&lt;p&gt;Hello, World!&lt;/p&gt;"
+                    </code> <!-- user story 6 (required) -->
+                </pre>
+                <p>
+                    The example function will display Hello, World! In the browser. 
+                    The default context is HTML, so the HTML string will be rendered properly by the browser.
+                </p>
+                <p>
+                    The document can then be saved with a name other than flask.py
+                </p>
+                <h3>Run Application</h3>
+                <p>
+                    First you need to add an the FLASK_APP environment variable.
+                </p>
+                <code>
+                    set FLASK_APP=hello
+                </code>
+                <p>
+                    It can then be run with flask run.
+                    The only exception to the above is if you name the Python file app.py or wsgi.py
+                </p>
+                <p>
+                    Running flask with flask run will launch a simple server for testing purposes. 
+                    The project can be viewed at http://127.0.0.1:5000/
+                </p>
+                <h3>Development Mode</h3>
+                <p>
+                    You will need to set the FLASK_ENV environment variable to development before calling flask run.
+                </p>
+                <h3>HTTP Methods</h3>
+                <p>
+                    By default routes in Flask only accept GET requests. This can be altered by specifying a methods list.
+                </p>
+                <code>
+                    @app.route('/login', methods=['GET', 'POST'])
+                </code>
+                <h3>Request Data</h3>
+                <p>
+                    Any information provided by the client is stored in the global request object. This needs to be imported.
+                </p>
+                <code>
+                    from flask import request
+                </code>
+                <p>
+                    Different information can then be accessed via attributes using dot notation.
+                </p>
+                <ul>
+                    <li>request.form: returns form data submitted by client.</li>
+                    <li>request.method will return the HTTP method used.</li>
+                </ul>
+            </section>
+
+            <section id="File_Structure" class="main-section"> <!-- user story 2 (required) --> <!-- user story 4 (required) -->
+                <header>File Structure</header> <!-- user story 3 (required) -->
+                <pre id="diagram">
+                    
+                    /yourapp  
+                    ├── static/
+                                ├── /style.css
+                                └── /script.js
+                    ├── /templates/
+                                ├── /layout.html
+                                ├── /index.html
+                                └── /about.html
+                    ├──/app.py
+                    └──/requirements.txt
+                </pre>
+                <ul>
+                    <li>Static: contains static files like CSS, JavaScript and images.</li>
+                    <li>Templates: store html templates here</li>
+                    <li>app.py: contains Python code for application</li>
+                    <li>requirements.txt: this stores the dependencies for the project</li>
+                </ul>
+            </section>
+
+            <section id="Templates" class="main-section"> <!-- user story 2 (required) --> <!-- user story 4 (required) -->
+                <header>Templates</header> <!-- user story 3 (required) -->
+                <p>
+                    Flask uses Jinja2 as its template engine. 
+                    Flask requires Jinja2 although other template engines can be added.
+                </p>
+                <code>
+                    {% from '_helpers.html' import my_macro with context %}
+                </code>
+                <p>
+                    Template inheritance allows you to reuse code on multiple pages for example header, navigation, footer etc.
+                </p>
+                <h3>Rendering Templates</h3>
+                <p>
+                    Add template files to a templates directory. These can then be rendered in the browser as below
+                </p>
+                <code>
+                    return render_template('hello.html')
+                </code>
+                <p>
+                    Jinja2 automatically escapes client input if any. This protects against injection attacks.
+                </p>
+            </section>
+
+            <section id="Testing" class="main-section"> <!-- user story 4 (required) -->
+                <header>Testing</header> <!-- user story 3 (required) -->
+                <p>
+                    Use the pytest framework to set up and run tests. Install with pip install pytest.
+                </p>
+                <h3>What are tests?</h3>
+                <p>
+                    Test are functions that start with test_ inside Python modules starting with test_.
+                </p>
+                <p>
+                    Try to test the code you write, not the code supplied by libraries in the project as these have already been tested. 
+                    Break down complex behaviours as separate functions that can be tested individually.
+                </p>
+                <h3>Fixtures</h3>
+                <p>
+                    A fixture allows code to be reused across multiple test. A fixture looks like this.
+                </p>
+                <pre>
+                    <code>
+                        @pytest.fixture()<br>
+                        def app():<br>
+                        app = create_app()<br>
+                        app.config.update({<br>
+                        "TESTING": True,<br>
+                        })<br>
+
+                        # other setup can go here<br>
+
+                        yield app<br>
+
+                        # clean up / reset resources here
+                    </code>
+                </pre>
+                <h3>Sending Requests</h3>
+                <p>
+                    Test requests can be sent without running a live server. 
+                    There are methods for testing common HTTP request methods such as client.get() and client.post().
+                </p>
+                <p>
+                    To make a request, call the method with the path to the route to test.
+                </p>
+                <pre>
+                    <code>
+                        def test_request_example(client):<br>
+                            response = client.get("/posts")<br>
+                            assert b"&lt;h2&gt;Hello, World!&lt;/h2&gt;" in response.data
+                    </code>
+                </pre>
+            </section>
+
+            <section id="Deployment" class="main-section"> <!-- user story 4 (required) -->
+                <header>Deployment</header> <!-- user story 3 (required) -->
+                <p>
+                    Flask’s built-int server is not suitable for production. Below are some possible hosted and self-hosted options.
+                </p>
+                <h3>Hosted Options</h3>
+                <ul class="link-list">
+                    <a href="https://devcenter.heroku.com/articles/getting-started-with-python">Heroku</a>
+                    <a href="https://cloud.google.com/appengine/docs/standard/python3/runtime">Google App Engine</a>
+                    <a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service">Google Cloud Run</a>
+                    <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-flask.html">AWS Elastic Beanstalk</a>
+                    <a href="https://docs.microsoft.com/en-us/azure/app-service/configure-language-python">Azure (IIS)</a>
+                    <a href="https://help.pythonanywhere.com/pages/Flask/">PythonAnywhere</a>
+                </ul>
+                <h3>Self-hosted Options</h3>
+                <ul class="link-list">
+                    <a href="https://flask.palletsprojects.com/en/2.0.x/deploying/wsgi-standalone/#gunicorn">Gunicorn</a>
+                    <a href="https://flask.palletsprojects.com/en/2.0.x/deploying/wsgi-standalone/#uwsgi">uWSGI</a>
+                    <a href="https://flask.palletsprojects.com/en/2.0.x/deploying/wsgi-standalone/#gevent">Gervent</a>
+                    <a href="https://flask.palletsprojects.com/en/2.0.x/deploying/wsgi-standalone/#twisted-web">Twisted Web</a>
+                    <a href="https://flask.palletsprojects.com/en/2.0.x/deploying/wsgi-standalone/#proxy-setups">Proxy Setups</a>
+                </ul>
+            </section>
+
+            <section id="Reference" class="main-section"> <!-- user story 4 (required) -->
+                <header>Reference</header> <!-- user story 3 (required) -->
+                <p>The information on this page has been adapted from the official Flask documentation</p>
+                <p>For more information <a href="https://flask.palletsprojects.com/en/2.0.x/">read the full Flask documentation.</a></p>
+            </section>
+        </main>
+        <!-- own scripts -->
+        <script src="script.js"></script>
+        <!-- freeCodeCamp testing scripts -->
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    </body>
+</html>
